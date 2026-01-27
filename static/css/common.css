@@ -7,7 +7,7 @@
 
 :root {
   --color-darkblue: #647fbc;
-  --collor-lightblue: #adbbdb;
+  --color-lightblue: #adbbdb;
   --color-yellow: #fafdd6;
   --color-text: #595959;
   --color-text-light: #3c3c3c;
@@ -17,7 +17,7 @@
 
 html {
     box-sizing: border-box;   
-    background-color: #FAFDD6;
+    background-color: var(--color-yellow);
 }
 
 *, *::before, *::after {
@@ -28,7 +28,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Noto Sans TC", sans-serif;
-    background-color: #FAFDD6;
+    background-color: var(--color-yellow);
 }
 
 a {
