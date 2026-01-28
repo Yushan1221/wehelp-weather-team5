@@ -15,7 +15,8 @@ router = APIRouter()
 
 @router.get("/api/weather")
 def weather(cur = Depends(get_cur)):
-    return WeatherModel.get_weather(cur)
+    data = WeatherModel.get_weather(cur)
+    return {"ok":True, "description": "全縣市36小時天氣預報", "data": data}
 
 @router.get("/api/temp")
 def tmep():
