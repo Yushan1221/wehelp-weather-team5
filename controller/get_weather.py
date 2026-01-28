@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import os
-
+from models.weather_api import *
+from db.deps import get_conn, get_cur
 from dotenv import load_dotenv
 load_dotenv()
 
-from models import temp_api, weather_api
+from service import request_temp
 from models.weather_post import push_six_cities_embed
 
 
@@ -13,12 +14,12 @@ from models.weather_post import push_six_cities_embed
 router = APIRouter()
 
 @router.get("/api/weather")
-def weather():
-    return weather_api.get_weather()
+def weather(cur = Depends(get_cur)):
+    return WeatherModel.get_weather(cur)
 
 @router.get("/api/temp")
 def tmep():
-    return temp_api.get_tmep()
+    return request_temp.get_tmep()
 
 
 # 推送天氣到Discord

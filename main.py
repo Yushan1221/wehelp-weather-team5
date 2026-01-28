@@ -4,15 +4,20 @@ from fastapi.staticfiles import StaticFiles
 from controller import get_weather
 from dotenv import load_dotenv
 load_dotenv()
-from contextlib import asynccontextmanger
-from models import scheduler
+from contextlib import asynccontextmanager
+from service import scheduler
+from models.weather_sync import sync_weather_from_cwa
 
-@asynccontextmanger # 用來定義「非同步上下文管理器」。它能讓我們把「啟動前要做的準備」和「關閉前要做的清理」寫在同一個函式裡。
+@asynccontextmanager # 用來定義「非同步上下文管理器」。它能讓我們把「啟動前要做的準備」和「關閉前要做的清理」寫在同一個函式裡。
 async def lifespan(app: FastAPI): # 把FastAPI 實體傳進來
-    # FastAPI 啟動時要做的事－啟動排程器
-    # 1. 啟動準備：如果這裡報錯，說明根本沒啟動成功，不進 try
-    scheduler.start_scheduler()
+
     try:
+        # 手動執行先抓取一次氣象資料
+        sync_weather_from_cwa() # 此方程式內包含連線資料庫
+
+        # 啟動排程器
+        scheduler.start_scheduler()
+
         # 程式執行到這裡會「暫停」，並開始處理使用者的 API 請求（也就是讓伺服器維持在 Running 狀態）。
         # 2. 運行中：伺服器現在會處理所有 API 請求
         yield
@@ -34,7 +39,12 @@ async def index(request: Request):
     return FileResponse("static/index.html", media_type="text/html")
 
 
-
+def initialize_database(cursor):
+    # 檢查是否已經有代碼資料
+    cursor.execute("SELECT COUNT(*) FROM weather_types")
+    if cursor.fetchone()[0] == 0:
+        print("偵測到空資料庫，正在寫入初始化天氣代碼...")
+        # 這裡可以執行 seed.sql 的內容
 
 
 """
