@@ -1,23 +1,21 @@
 #map {
-  position: absolute;
-  top: 120px;
-  left: 800px;
-  width: 500px;
-  height: 637.2px;
-
-  /* grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 3; */
-
+  /* position: absolute; */
+  /* top: 120px; */
+  /* left: 800px; */
+  /* width: 480; */
+  /* height: 637.2px; */
   display: flex;
   justify-content: center;
   align-items: center;
-
-  margin-left: 20px;
-  overflow: hidden;
+  /* margin-left: 20px; */
+  /* overflow: hidden; */
   border-radius: 30px;
   background-color: var(--color-darkblue);
+  grid-column: span 5;
+  grid-column-start: 8;
+  grid-column-end: 13;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 .map-svg {
   fill: white;
