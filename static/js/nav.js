@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 填入天氣資訊
     const cityObj = Array.isArray(all) ? all.find((x) => x.city === api) : null;
-    const first = cityObj?.forcasts?.[0];
+    const first = cityObj?.forecasts?.[0];
 
     if (first) {
       const weather = first.weather ?? "";

@@ -36,15 +36,15 @@ def prase_data(row_data):
         city_name = location['LocationName']
         items = location['WeatherElement'][0]['Time']
         
-        forcasts = []
+        forecasts = []
         for item in items:
             slot = {
                 item['DataTime'].replace('+08:00', ''): item['ElementValue'][0]['Temperature']
             }
-            forcasts.append(slot)
+            forecasts.append(slot)
         waether_map = {
             'city': city_name,
-            'forcasts': forcasts
+            'forecasts': forecasts
         }
         data.append(waether_map)
 

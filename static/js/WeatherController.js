@@ -27,13 +27,13 @@ export class WeatherController {
         this.view.renderCityBlock(city);
 
         const targetCity = this.AllWeatherData.find(item => item.city === city);
-        const CityWeather = targetCity?.forcasts;
+        const CityWeather = targetCity?.forecasts;
         this.view.renderWeatherBlock(CityWeather);
     }
 
     initChart(city) {
         const targetCity = this.AllTempData.find(item => item.city === city);
-        const CityTempPerHour = targetCity?.forcasts;
+        const CityTempPerHour = targetCity?.forecasts;
         const data = this._processForecastData(CityTempPerHour);
         if (data?.x?.length > 0 && data?.y?.length > 0) {
             this.view.createWeatherChart(data.x, data.y);
@@ -42,7 +42,7 @@ export class WeatherController {
 
     updateChart(city) {
         const targetCity = this.AllTempData.find(item => item.city === city);
-        const CityTempPerHour = targetCity?.forcasts;
+        const CityTempPerHour = targetCity?.forecasts;
         const data = this._processForecastData(CityTempPerHour);
         if (data?.x?.length > 0 && data?.y?.length > 0) {
             this.view.updateWeatherChart(data.x, data.y);

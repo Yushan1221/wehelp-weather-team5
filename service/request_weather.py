@@ -54,7 +54,7 @@ def prase_data(row_data):
             value = item['time'] # 如Wx, PoP, Ci
             weather_map[key] = value # [...] 整串資料
 
-        forcasts = []
+        forecasts = []
 
         for i in range(3):
             slot = {
@@ -70,9 +70,9 @@ def prase_data(row_data):
 
                 'comfort': weather_map['CI'][i]['parameter']['parameterName'],
             }
-            forcasts.append(slot)
+            forecasts.append(slot)
         
-        city_map = {'city': city_name, 'forcasts': forcasts}
+        city_map = {'city': city_name, 'forecasts': forecasts}
         data.append(city_map)
     
     return data

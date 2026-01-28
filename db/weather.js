@@ -4,7 +4,7 @@
     'data': [
         {
             'city': '嘉義縣', 
-            'forcasts': [
+            'forecasts': [
                 {
                     'startTime': '2026-01-27 12:00:00', 
                     'endTime': '2026-01-27 18:00:00', 
@@ -42,7 +42,7 @@
         }, 
         {
             'city': '新北市', 
-            'forcasts': [
+            'forecasts': [
                 {
                     '依此類推':'依此類推'
                 }

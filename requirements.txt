@@ -4,5 +4,4 @@ fastapi
 uvicorn
 python-dotenv
 httpx
-# scheduler 排程器
 apscheduler
