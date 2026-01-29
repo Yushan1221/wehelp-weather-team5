@@ -64,8 +64,14 @@ export class WeatherView {
 
       // "預測天氣面板"標題
       if (data[0]["endTime"].slice(11,13)=="06") {
-        this.secondTitle.textContent = "今日白天";
-        this.thirdTitle.textContent = "今日晚上";
+        if (data[0]["startTime"].slice(11,13)=="18") {
+          this.secondTitle.textContent = "明日白天";
+          this.thirdTitle.textContent = "明日晚上";
+        }
+        else {
+          this.secondTitle.textContent = "今日白天";
+          this.thirdTitle.textContent = "今日晚上";
+        }
       }
       else {
         this.secondTitle.textContent = "明日白天";
@@ -252,6 +258,6 @@ export class WeatherView {
           cards.forEach(card => {
               card.classList.remove('weather-flash-active');
           });
-      }, 200);
+      }, 300);
   }
 }
