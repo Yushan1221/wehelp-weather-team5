@@ -11,16 +11,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_tmep():
-    CWB_API_KEY = os.getenv('CWB_API_KEY')
+    CWA_API_KEY = os.getenv('CWA_API_KEY')
 
-    if not CWB_API_KEY:
+    if not CWA_API_KEY:
         print("API_KEY not found")
         return
     
     url = "https://opendata.cwa.gov.tw//api/v1/rest/datastore/F-D0047-089"
 
     parmas = {
-        'Authorization': CWB_API_KEY,
+        'Authorization': CWA_API_KEY,
         'ElementName': '溫度'
     }
     res = requests.get(url, params=parmas)    

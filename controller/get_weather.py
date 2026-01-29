@@ -22,15 +22,10 @@ def weather(cur = Depends(get_cur)):
 def tmep():
     return request_temp.get_tmep()
 
-
-# 推送天氣到Discord
-
-CWA_API_KEY = os.getenv("CWA_API_KEY", "").strip()
-WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()
-
-
 @router.post("/api/weather/push-six")
 def push_six():
+    CWA_API_KEY = os.getenv("CWA_API_KEY", "").strip()
+    WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()
     if not CWA_API_KEY:
         return JSONResponse({"error": True, "message": "Missing CWA_API_KEY"}, status_code=500)
 
