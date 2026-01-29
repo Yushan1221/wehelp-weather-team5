@@ -24,7 +24,7 @@
     <div id="nav">
       <div class="nav-container">
         <ul class="nav-container-input">
-          <li>點選小圖示或地圖以切換地點</li>
+          <li>台灣天氣預報</li>
         </ul>
         <ul class="nav-container-ul">
           <li class="nav-ul-li"><a class="nav-li-a" href="#">地點一</a></li>
@@ -32,6 +32,10 @@
           <li class="nav-ul-li"><a class="nav-li-a" href="#">地點三</a></li>
           <li class="nav-ul-li"><a class="nav-li-a" href="#">地點四</a></li>
         </ul>
+        <div class="nav-dropcontainer" id="dropbutton">
+          <p>選擇縣市 ▼</p>
+          <ul class="nav-dropcontainer-ul" id="droplist"></ul>
+        </div>
       </div>
     </div>
 
@@ -44,13 +48,23 @@
             <div class="city-title" id="city-name"></div>
             <div class="city-date" id="city-date"></div>
             <div class="city-circle-list">
-              <div class="city-circle-item"><img src="/static/img/01.png" alt=""></div>
-              <div class="city-circle-item"><img src="/static/img/02.png" alt=""></div>
-              <div class="city-circle-item"><img src="/static/img/08.png" alt=""></div>
-              <div class="city-circle-item"><img src="/static/img/12.png" alt=""></div>
+              <div class="city-circle-item">
+                <img src="/static/img/01.png" alt="" />
+              </div>
+              <div class="city-circle-item">
+                <img src="/static/img/02.png" alt="" />
+              </div>
+              <div class="city-circle-item">
+                <img src="/static/img/08.png" alt="" />
+              </div>
+              <div class="city-circle-item">
+                <img src="/static/img/12.png" alt="" />
+              </div>
             </div>
             <div class="city-subtitle">六都天氣預報</div>
-            <div class="city-btn" id="dc-btn"><img src="/static/img/discord.png" alt="discord"> 傳送！</div>
+            <div class="city-btn" id="dc-btn">
+              <img src="/static/img/discord.png" alt="discord" /> 傳送！
+            </div>
           </div>
           <div class="city-card-item">
             <div class="weather-time">
@@ -58,11 +72,7 @@
               <span id="weather-first-max-time"></span>
             </div>
             <div class="city-state-icon">
-              <img
-                src=""
-                alt=""
-                id="weather-first-icon"
-              />
+              <img src="" alt="" id="weather-first-icon" />
             </div>
             <div class="weather-state-text" id="weather-first-state"></div>
             <div class="weather-temperature">
@@ -81,11 +91,7 @@
               <span id="weather-second-max-time"></span>
             </div>
             <div class="weather-state-icon">
-              <img
-                src=""
-                alt=""
-                id="weather-second-icon"
-              />
+              <img src="" alt="" id="weather-second-icon" />
             </div>
             <div class="weather-state-text" id="weather-second-state"></div>
             <div class="weather-temperature">
@@ -125,11 +131,10 @@
               xmlns="http://www.w3.org/2000/svg"
               version="1.2"
               baseProfile="tiny"
-              width="400"
-              height="600"
-              viewBox="422 49 150 310"
+              viewBox="422 51 150 310"
               stroke-linecap="round"
               stroke-linejoin="round"
+              preserveAspectRatio="xMidYMid meet"
             >
               <!-- 本島 -->
               <!-- 基隆市 -->
