@@ -133,7 +133,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .nav-container-input {
     max-width: 60%;
     margin: 0 20px;
