@@ -7,41 +7,51 @@ class WeatherModel:
         try:
             # 使用 Window Function (ROW_NUMBER) 確保每個城市只取最新的 3 筆
             sql = """
-                SELECT
-                    res.city_name,
-                    res.start_time,
-                    res.end_time,
-                    res.weather,
-                    res.weather_code,
-                    res.icon_path,
-                    res.rain_pro,
-                    res.min_temp,
-                    res.max_temp,
-                    res.comfort
+                SELECT 
+                    final.city_name,
+                    final.start_time,
+                    final.end_time,
+                    final.weather,
+                    final.weather_code,
+                    final.icon_path,
+                    final.rain_pro,
+                    final.min_temp,
+                    final.max_temp,
+                    final.comfort
                 FROM (
-                    SELECT
-                        l.city_name,
-                        f.start_time,
-                        f.end_time,
-                        f.weather,
-                        f.weather_code,
-                        t.icon_path,
-                        f.rain_pro,
-                        f.min_temp,
-                        f.max_temp,
-                        f.comfort,
-                        l.id AS city_id,
+                    SELECT 
+                        *,
                         ROW_NUMBER() OVER(
-                            PARTITION BY f.location_id
-                            ORDER BY f.start_time ASC
+                            PARTITION BY t.city_id 
+                            ORDER BY t.start_time ASC
                         ) as row_num
-                    FROM weather_forecasts f
-                    JOIN locations l ON f.location_id = l.id
-                    JOIN weather_types t ON f.weather_code = t.weather_code
-                    WHERE f.end_time > NOW()  -- 只抓尚未結束的預報
-                ) AS res
-                WHERE res.row_num <= 3  -- 關鍵：每個城市只拿前三筆
-                ORDER BY res.city_id ASC, res.start_time ASC;
+                    FROM (
+                        SELECT
+                            l.city_name,
+                            f.start_time,
+                            f.end_time,
+                            f.weather,
+                            f.weather_code,
+                            ti.icon_path,
+                            f.rain_pro,
+                            f.min_temp,
+                            f.max_temp,
+                            f.comfort,
+                            l.id AS city_id,
+                            -- 核心：針對同一個結束時間，只選最新抓到的那一筆
+                            ROW_NUMBER() OVER(
+                                PARTITION BY f.location_id, f.end_time 
+                                ORDER BY f.created_at DESC
+                            ) as latest_rank
+                        FROM weather_forecasts f
+                        JOIN locations l ON f.location_id = l.id
+                        JOIN weather_types ti ON f.weather_code = ti.weather_code
+                        WHERE f.end_time > NOW()
+                    ) AS t
+                    WHERE t.latest_rank = 1 -- 這裡先過濾掉「重疊但較舊」的資料
+                ) AS final
+                WHERE final.row_num <= 3    -- 這裡再精準拿前三筆
+                ORDER BY final.city_id ASC, final.start_time ASC;
             """
             cur.execute(sql)
             rows = cur.fetchall()
