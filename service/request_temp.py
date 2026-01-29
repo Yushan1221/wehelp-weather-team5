@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_tmep():
+def get_temp():
     CWA_API_KEY = os.getenv('CWA_API_KEY')
 
     if not CWA_API_KEY:
