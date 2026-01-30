@@ -74,8 +74,8 @@ export class WeatherView {
         }
       }
       else {
-        this.secondTitle.textContent = "明日白天";
-        this.thirdTitle.textContent = "明日晚上";
+        this.secondTitle.textContent = "今晚明晨";
+        this.thirdTitle.textContent = "明日白天";
       }
     }
 
